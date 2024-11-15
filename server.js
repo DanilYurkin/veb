@@ -3,35 +3,35 @@ const path = require('path');
 const fs = require('fs');
 
 const app = express();
-const PORT = 3054; // Порт, на котором будет работать сервер
+const PORT = 3054; // ГЏГ®Г°ГІ, Г­Г  ГЄГ®ГІГ®Г°Г®Г¬ ГЎГіГ¤ГҐГІ Г°Г ГЎГ®ГІГ ГІГј Г±ГҐГ°ГўГҐГ°
 
-// Определяем путь к файлу index.html
-const filePath = path.join(__dirname, 'public', 'index.html'); // Используйте __dirname для абсолютного пути
+// ГЋГЇГ°ГҐГ¤ГҐГ«ГїГҐГ¬ ГЇГіГІГј ГЄ ГґГ Г©Г«Гі index.html
+const filePath = path.join(__dirname, 'public', 'index.html'); // Г€Г±ГЇГ®Г«ГјГ§ГіГ©ГІГҐ __dirname Г¤Г«Гї Г ГЎГ±Г®Г«ГѕГІГ­Г®ГЈГ® ГЇГіГІГЁ
 
-// Определяем папки для статических файлов
-app.use('/css', express.static(path.join(__dirname, 'public', 'css'))); // Папка для CSS
-app.use('/images', express.static(path.join(__dirname, 'public', 'images'))); // Папка для изображений
+// ГЋГЇГ°ГҐГ¤ГҐГ«ГїГҐГ¬ ГЇГ ГЇГЄГЁ Г¤Г«Гї Г±ГІГ ГІГЁГ·ГҐГ±ГЄГЁГµ ГґГ Г©Г«Г®Гў
+app.use('/css', express.static(path.join(__dirname,'css'))); // ГЏГ ГЇГЄГ  Г¤Г«Гї CSS
+app.use('/images', express.static(path.join(__dirname,'images'))); // ГЏГ ГЇГЄГ  Г¤Г«Гї ГЁГ§Г®ГЎГ°Г Г¦ГҐГ­ГЁГ©
 
 app.get('/', (req, res) => {
-    // Проверяем, существует ли файл
+    // ГЏГ°Г®ГўГҐГ°ГїГҐГ¬, Г±ГіГ№ГҐГ±ГІГўГіГҐГІ Г«ГЁ ГґГ Г©Г«
     fs.stat(filePath, (err, stats) => {
         if (err) {
-            console.error('Ошибка при проверке файла:', err);
-            return res.status(404).send('Файл не найден');
+            console.error('ГЋГёГЁГЎГЄГ  ГЇГ°ГЁ ГЇГ°Г®ГўГҐГ°ГЄГҐ ГґГ Г©Г«Г :', err);
+            return res.status(404).send('Г”Г Г©Г« Г­ГҐ Г­Г Г©Г¤ГҐГ­');
         }
 
-        // Если файл существует, отправляем его
+        // Г…Г±Г«ГЁ ГґГ Г©Г« Г±ГіГ№ГҐГ±ГІГўГіГҐГІ, Г®ГІГЇГ°Г ГўГ«ГїГҐГ¬ ГҐГЈГ®
         res.sendFile(filePath, (err) => {
             if (err) {
-                console.error('Ошибка отправки файла:', err);
+                console.error('ГЋГёГЁГЎГЄГ  Г®ГІГЇГ°Г ГўГЄГЁ ГґГ Г©Г«Г :', err);
                 res.status(err.status).end();
             }
         });
     });
 });
 
-// Запуск сервера
+// Г‡Г ГЇГіГ±ГЄ Г±ГҐГ°ГўГҐГ°Г 
 app.listen(PORT, () => {
-    console.log(`Сервер запущен на http://localhost:${PORT}`);
+    console.log(`Г‘ГҐГ°ГўГҐГ° Г§Г ГЇГіГ№ГҐГ­ Г­Г  http://localhost:${PORT}`);
 });
 
